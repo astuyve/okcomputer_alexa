@@ -14,7 +14,7 @@ export class HealthcheckService {
     
     for (const check_type in result)
     {      
-      returnString += "Check Type " + check_type.replace('_', ' ')
+      returnString += "Check Type " + check_type.replace(/_/g, ' ')
       if (result[check_type]['success']) returnString += " has Passed! "
       if (!result[check_type]['success']) {
         returnString += " has Failed! " 
