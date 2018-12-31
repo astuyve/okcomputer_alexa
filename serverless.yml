@@ -1,0 +1,30 @@
+service:
+  name: okcomputer-alexa
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: serverless-admin
+
+functions:
+  test_check:
+    handler: handler.test
+    events:
+      - http:
+          method: get
+          path: test
+  ok_computer:
+    handler: handler.handler
+    events:
+      - alexaSkill: ${env:LAMBDA_ARN}
+
+custom:
+  serverless-offline:
+    port: 9020
+    host: 0.0.0.0
